@@ -1,8 +1,9 @@
 package WordCount;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Arrays;
+// import java.util.HashMap;
+// import java.util.ArrayList;
+// import java.util.List;
+// import java.util.Arrays;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -39,7 +40,31 @@ public class Main {
             
         }
 
-        System.out.println(wordCount);
+        ArrayList<HashMap.Entry<String, Integer>> sortedList = new ArrayList<HashMap.Entry<String, Integer>>();
+        sortedList.addAll(wordCount.entrySet());
+
+        // System.out.println("Printed Listed is! " + sortedList);
+        // ^^This works
+
+        Collections.sort(sortedList, new Comparator<HashMap.Entry<String, Integer>>() {
+            public int compare(HashMap.Entry<String, Integer> o1, HashMap.Entry<String, Integer> o2) {
+                // return o1.getValue().compareToIgnoreCase(o2.getValue());
+                return o2.getValue() - o1.getValue();
+            }
+        });
+
+        int limit = 0;
+            for (HashMap.Entry<String, Integer> d : sortedList) {
+                if (limit < 50) {
+                System.out.println("key: " + d.getKey() + " value: " + d.getValue());
+                } else {
+                    break;
+                }
+                limit+= 1;
+            }
+
+
+        // System.out.println(wordCount);
     }
 
     
